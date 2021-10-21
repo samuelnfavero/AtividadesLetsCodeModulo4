@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício Adicionar e Remover Tags</title>
+</head>
+<style>
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: fit-content;
+    margin-top: 10vh;
+}
+</style>
+<body>
+    <div class="container">
+    <h1>Cadastrar</h1>
+    <form>
+        <input type="text" class="name"/>
+        <button type="button" class="send">Send</button>
+    </form>
+    <div>
+        <h2>Nomes:</h2>
+        <ul class="variableContent"></ul>
+    </div>
+    </div>
+    <script>
+        const button = document.querySelector(".send")
+        const variableContent = document.querySelector(`.variableContent`)
+        let cont = 1
+
+        function getName(){
+            const name = document.querySelector(".name").value
+            document.querySelector(".name").value = " "
+            return name;
+        }
+
+        function remover(child){
+            const lines = document.querySelector(`ul.variableContent li.linha${child}`)
+            variableContent.removeChild(lines)
+        }
+
+        button.onclick = function(){
+            const li = document.createElement("li")
+            li.className= `linha${cont}`
+            const name = getName();
+            li.textContent = name
+            variableContent.appendChild(li)
+            
+            const removeButton = document.createElement("button")
+            removeButton.setAttribute('onclick',`remover(${cont})`)
+            removeButton.textContent='Remover'
+            li.appendChild(removeButton)
+            cont++
+        }
+    </script>
+</body>
+</html>
