@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='javascript/calculator.js'></script>
+    <script src="javascript/operationAndHtmlHandler.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/calculator.css">
+    <link rel="shortcut icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Calculadora</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Calculadora</h1>
+        <input type='text' placeholder="Digite aqui os valores." class="INPUT_UOJ" id='number'/><br/>
+        <div class="operationButtons">
+            <button type="button" class="BUTTON_UOJ" onclick="operationAndHtmlHandler('+')"> + </button>
+            <button type="button" class="BUTTON_UOJ" onclick="operationAndHtmlHandler('-')">-</button>
+            <button type="button" class="BUTTON_UOJ" onclick="operationAndHtmlHandler('*')">x</button>
+            <button type="button" class="BUTTON_UOJ" onclick="operationAndHtmlHandler('/')">/</button>
+        </div>
+        <button type="button" id="equals" class="BUTTON_UOJ" onclick="operationValues(), changeTotal()">Igual</button><br/>
+        <div class="INPUT_UOJ" id="total">
+        <h2><span id="operation">0</span><span id='equal'></span><span id='result'></span></h2>
+        </div>
+    </div>
+    <script>
+
+        function operationAndHtmlHandler(signal){
+            operationValues()
+            calc.enter(signal)
+            showOperation()
+        }
+
+    </script>
+</body>
+</html>
