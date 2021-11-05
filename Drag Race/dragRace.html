@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="cronometro.js"></script>
+    <link rel="stylesheet" href="dragRace.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        <h1>Drag Race</h1>
+        <form>
+            <label>
+                <input class="name" placeholder="Insira seu nome aqui..."/><br/><br/>
+                <div class="buttons">
+                    <button class="buttonStart">Start</button>
+                    <button class="buttonStop">Stop</button>
+                </div>
+            </label>    
+        </form>
+        <button class="finishRace">Finish Race</button>
+        <h2 class="timer"> 00:00:00</h2>
+        <ul class="variableContent">
+        </ul>
+    </div>
+    <script>
+        
+        const buttonStart = document.querySelector(`button.buttonStart`)
+        const buttonStop = document.querySelector(`button.buttonStop`)
+        const variableContent = document.querySelector(`.variableContent`)
+        const finishRace = document.querySelector(`.finishRace`)
+        let _IS_TIMING = false
+        let cont = 0
+
+        buttonStart.onclick = (event) => {
+            event.preventDefault();
+            name = getName()
+            if(name !== ""){   
+                timer = timerModule().delay(10)
+                const li = document.createElement(`li`)
+                li.textContent = name + ' '
+                variableContent.appendChild(li) 
+                _IS_TIMING = true
+                cont++               
+            }
+        }
+
+        buttonStop.onclick = (event) =>{
+            event.preventDefault();
+            if(_IS_TIMING){
+                clearInterval(timer)
+                const time =  document.querySelector(`h2.timer`).textContent
+                const li =  document.querySelector(`li:last-of-type`)
+                li.textContent += time
+                sessionStorage.setItem(`${name}`, `${time}`)
+                document.querySelector(`h2.timer`).textContent = `00:00:00`
+                _IS_TIMING = false
+            }
+        }
+
+        
+        finishRace.onclick = () =>{
+            sessionStorage.clear()
+            for (let i = 0; i < cont; i++){
+            const li = document.querySelector('li')
+            variableContent.removeChild(li)
+            }
+        }
+
+        function getName(){
+            const name = document.querySelector(`input.name`).value
+            document.querySelector(`input.name`).value = ""
+            return name
+        }
+       
+        
+    </script>
+</body>
+</html>
